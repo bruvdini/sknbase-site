@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SKNBASE — AI skincare for Nigerian skin</title>
+<meta name="description" content="SKNBASE builds your personalized AM/PM skincare routine — matched to your skin, your concern, your city's climate, and your budget. Built for Nigerian, melanin-rich skin." />
+<meta property="og:title" content="SKNBASE — AI skincare for Nigerian skin" />
+<meta property="og:description" content="Personalized routines, AI face scans, and real products from Nigerian stores. Built for melanin-rich skin." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/png" href="images/sknbase-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --terracotta: #C47B5A;
+    --terracotta-deep: #A85E3F;
+    --terracotta-soft: #E8CDBF;
+    --ink: #2C1810;
+    --ink-soft: #6B564A;
+    --night: #0D1B2A;
+    --night-deep: #081220;
+    --white: #FFFFFF;
+    --green: #22C55E;
+    --radius: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247, 243, 238, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(196, 123, 90, 0.12);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; max-width: 1120px; margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 3px; font-size: 17px; color: var(--terracotta-deep); }
+  .brand img { width: 34px; height: 34px; object-fit: contain; }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--terracotta-deep); }
+  .nav-cta {
+    background: var(--terracotta); color: var(--white);
+    padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(196, 123, 90, 0.35);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(196, 123, 90, 0.45); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* ---------- phone frame ---------- */
+  .phone {
+    background: #17171a;
+    border-radius: 48px;
+    padding: 11px;
+    box-shadow: 0 24px 60px rgba(44, 24, 16, 0.28), 0 6px 18px rgba(44, 24, 16, 0.18);
+    position: relative;
+    width: 100%;
+  }
+  .phone::after {
+    content: ""; position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    width: 88px; height: 24px; background: #17171a; border-radius: 999px; z-index: 2;
+  }
+  .phone img { border-radius: 38px; width: 100%; }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; overflow: hidden; padding: 72px 0 96px; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white); border: 1px solid rgba(196,123,90,.25);
+    padding: 7px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
+    color: var(--terracotta-deep); margin-bottom: 22px;
+    box-shadow: 0 2px 10px rgba(44,24,16,.05);
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  h1 {
+    font-size: clamp(34px, 5vw, 54px); font-weight: 800; line-height: 1.12;
+    letter-spacing: -0.5px; margin-bottom: 20px;
+  }
+  h1 .accent { color: var(--terracotta); }
+  .hero p.lead { font-size: 17px; color: var(--ink-soft); max-width: 520px; margin-bottom: 32px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 28px; }
+  .btn-primary {
+    background: var(--terracotta); color: var(--white); font-weight: 600; font-size: 15px;
+    padding: 15px 32px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 24px rgba(196,123,90,.4); transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(196,123,90,.5); }
+  .btn-ghost {
+    color: var(--ink); font-weight: 600; font-size: 15px; padding: 15px 28px;
+    border-radius: 999px; border: 1.5px solid rgba(44,24,16,.18); background: transparent;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-ghost:hover { border-color: var(--terracotta); background: rgba(196,123,90,.06); }
+  .store-note { font-size: 13px; color: var(--ink-soft); }
+  .store-note strong { color: var(--terracotta-deep); }
+
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .hero-visual .phone { max-width: 320px; transform: rotate(2deg); }
+  .float-chip {
+    position: absolute; background: var(--white); border-radius: 999px;
+    padding: 10px 18px; font-size: 13px; font-weight: 600;
+    box-shadow: 0 10px 30px rgba(44,24,16,.14); z-index: 3;
+    display: flex; align-items: center; gap: 7px;
+    animation: floaty 5s ease-in-out infinite;
+  }
+  .float-chip.c1 { top: 12%; left: -4%; color: var(--green); animation-delay: 0s; }
+  .float-chip.c2 { top: 44%; right: -6%; color: var(--terracotta-deep); animation-delay: 1.4s; }
+  .float-chip.c3 { bottom: 12%; left: 0%; color: var(--ink); animation-delay: 2.6s; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .hero-glow {
+    position: absolute; width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,123,90,.16), transparent 65%);
+    top: -80px; right: -140px; pointer-events: none;
+  }
+  @media (max-width: 880px) {
+    .hero { padding: 48px 0 64px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-visual .phone { max-width: 280px; }
+    .float-chip.c1 { left: 2%; } .float-chip.c2 { right: 0; }
+  }
+
+  /* ---------- trust strip ---------- */
+  .trust {
+    border-top: 1px solid rgba(196,123,90,.14); border-bottom: 1px solid rgba(196,123,90,.14);
+    background: var(--white); padding: 22px 0;
+  }
+  .trust-inner {
+    display: flex; justify-content: center; gap: clamp(24px, 6vw, 72px);
+    flex-wrap: wrap; font-size: 14px; font-weight: 500; color: var(--ink-soft);
+  }
+  .trust-inner span strong { color: var(--ink); font-weight: 700; }
+
+  /* ---------- sections ---------- */
+  section { padding: 92px 0; }
+  .kicker {
+    font-size: 13px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 14px;
+  }
+  h2 { font-size: clamp(27px, 3.6vw, 40px); font-weight: 700; line-height: 1.2; letter-spacing: -0.4px; margin-bottom: 16px; }
+  .sub { font-size: 16px; color: var(--ink-soft); max-width: 620px; }
+  .center { text-align: center; }
+  .center .sub { margin: 0 auto; }
+
+  /* ---------- how it works ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .step-card {
+    background: var(--white); border-radius: var(--radius); padding: 34px 28px;
+    box-shadow: 0 4px 24px rgba(44,24,16,.06);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .step-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(44,24,16,.1); }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--terracotta), var(--terracotta-deep));
+    color: var(--white); font-weight: 700; font-size: 18px; margin-bottom: 20px;
+  }
+  .step-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+  .step-card p { font-size: 14.5px; color: var(--ink-soft); }
+  @media (max-width: 880px) { .steps { grid-template-columns: 1fr; } }
+
+  /* ---------- feature rows ---------- */
+  .feature-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 6vw, 88px);
+    align-items: center; margin-top: 88px;
+  }
+  .feature-row:first-of-type { margin-top: 64px; }
+  .feature-row .phone { max-width: 300px; margin: 0 auto; }
+  .feature-row.flip .f-visual { order: 2; }
+  .feature-row h3 { font-size: clamp(23px, 2.8vw, 31px); font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
+  .feature-row p { font-size: 15.5px; color: var(--ink-soft); margin-bottom: 18px; }
+  .f-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .f-list li { display: flex; gap: 12px; font-size: 14.5px; align-items: flex-start; }
+  .f-list .tick {
+    flex: none; width: 22px; height: 22px; border-radius: 50%; margin-top: 2px;
+    background: rgba(196,123,90,.14); color: var(--terracotta-deep);
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+  }
+  .duo { display: flex; gap: 18px; justify-content: center; }
+  .duo .phone { max-width: 230px; }
+  .duo .phone:last-child { transform: translateY(28px) rotate(2deg); }
+  .duo .phone:first-child { transform: rotate(-2deg); }
+  @media (max-width: 880px) {
+    .feature-row { grid-template-columns: 1fr; gap: 40px; margin-top: 72px; }
+    .feature-row.flip .f-visual { order: 0; }
+    .duo .phone { max-width: 46%; }
+  }
+
+  /* ---------- dark scan section ---------- */
+  .scan-section {
+    background: radial-gradient(1200px 600px at 75% 10%, rgba(196,123,90,.14), transparent 60%), var(--night);
+    color: var(--cream); position: relative; overflow: hidden;
+  }
+  .scan-section .kicker { color: var(--terracotta-soft); }
+  .scan-section h2 { color: var(--white); }
+  .scan-section .sub, .scan-section p { color: rgba(247,243,238,.72); }
+  .scan-section .f-list li { color: rgba(247,243,238,.88); }
+  .scan-section .f-list .tick { background: rgba(196,123,90,.24); color: var(--terracotta-soft); }
+  .stars { position: absolute; inset: 0; pointer-events: none; }
+  .stars i {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: rgba(247,243,238,.5); animation: twinkle 4s infinite;
+  }
+  @keyframes twinkle { 0%,100% { opacity: .2; } 50% { opacity: .9; } }
+  .scan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 6vw, 88px); align-items: center; position: relative; z-index: 1; }
+  .scan-grid .phone { max-width: 300px; margin: 0 auto; background: #000; box-shadow: 0 24px 70px rgba(0,0,0,.6), 0 0 80px rgba(196,123,90,.12); }
+  @media (max-width: 880px) { .scan-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- why cards ---------- */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .why-card {
+    background: var(--white); border-radius: var(--radius); padding: 34px 28px;
+    border: 1px solid rgba(196,123,90,.12);
+    box-shadow: 0 4px 24px rgba(44,24,16,.05);
+  }
+  .why-card .emoji { font-size: 30px; margin-bottom: 16px; }
+  .why-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .why-card p { font-size: 14.5px; color: var(--ink-soft); }
+  @media (max-width: 880px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- gallery ---------- */
+  .gallery-scroll {
+    display: flex; gap: 22px; overflow-x: auto; padding: 48px 24px 28px;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    max-width: 1120px; margin: 0 auto;
+  }
+  .gallery-scroll::-webkit-scrollbar { height: 8px; }
+  .gallery-scroll::-webkit-scrollbar-thumb { background: rgba(196,123,90,.35); border-radius: 99px; }
+  .g-item { flex: 0 0 auto; width: 232px; scroll-snap-align: center; }
+  .g-item .phone { border-radius: 36px; padding: 8px; }
+  .g-item .phone::after { width: 64px; height: 17px; top: 15px; }
+  .g-item .phone img { border-radius: 29px; }
+  .g-item figcaption { text-align: center; font-size: 13px; font-weight: 500; color: var(--ink-soft); margin-top: 14px; }
+
+  /* ---------- pricing ---------- */
+  .pricing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 420px)); gap: 26px; justify-content: center; margin-top: 56px; }
+  .price-card {
+    background: var(--white); border-radius: 24px; padding: 38px 34px;
+    box-shadow: 0 4px 24px rgba(44,24,16,.06); position: relative;
+  }
+  .price-card.premium {
+    background: linear-gradient(160deg, #33201a, var(--ink));
+    color: var(--cream); box-shadow: 0 20px 50px rgba(44,24,16,.35);
+  }
+  .price-card .plan { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--terracotta); margin-bottom: 8px; }
+  .price-card.premium .plan { color: var(--terracotta-soft); }
+  .price-card .amount { font-size: 38px; font-weight: 800; margin-bottom: 2px; }
+  .price-card .per { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 24px; }
+  .price-card.premium .per { color: rgba(247,243,238,.6); }
+  .price-card ul { list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; margin-bottom: 30px; }
+  .price-card ul li { display: flex; gap: 10px; align-items: flex-start; }
+  .price-card ul .tick { color: var(--terracotta-deep); font-weight: 700; }
+  .price-card.premium ul .tick { color: var(--terracotta-soft); }
+  .badge-popular {
+    position: absolute; top: -14px; right: 28px;
+    background: var(--terracotta); color: var(--white); font-size: 12px; font-weight: 700;
+    padding: 6px 16px; border-radius: 999px; box-shadow: 0 6px 16px rgba(196,123,90,.4);
+  }
+  .price-card .btn-primary, .price-card .btn-ghost { width: 100%; justify-content: center; text-align: center; display: inline-flex; }
+  .price-card.premium .btn-primary { background: var(--terracotta); }
+  @media (max-width: 880px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- faq ---------- */
+  .faq-list { max-width: 720px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 14px; }
+  details {
+    background: var(--white); border-radius: 16px; padding: 20px 26px;
+    box-shadow: 0 3px 16px rgba(44,24,16,.05); cursor: pointer;
+  }
+  details summary { font-weight: 600; font-size: 15.5px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--terracotta); transition: transform .25s; flex: none; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin-top: 12px; font-size: 14.5px; color: var(--ink-soft); }
+
+  /* ---------- final cta ---------- */
+  .final-cta {
+    background: linear-gradient(150deg, var(--terracotta), var(--terracotta-deep));
+    border-radius: 32px; padding: clamp(48px, 7vw, 84px); text-align: center; color: var(--white);
+    position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%;
+    background: rgba(255,255,255,.09); top: -180px; right: -120px;
+  }
+  .final-cta h2 { color: var(--white); }
+  .final-cta p { color: rgba(255,255,255,.85); max-width: 520px; margin: 0 auto 32px; font-size: 16px; }
+  .final-cta .btn-light {
+    background: var(--white); color: var(--terracotta-deep); font-weight: 700; font-size: 15px;
+    padding: 16px 38px; border-radius: 999px; display: inline-block;
+    box-shadow: 0 10px 30px rgba(44,24,16,.25); transition: transform .2s;
+  }
+  .final-cta .btn-light:hover { transform: translateY(-2px); }
+
+  /* ---------- footer ---------- */
+  footer { background: var(--ink); color: rgba(247,243,238,.75); padding: 56px 0 40px; margin-top: 92px; }
+  .foot-grid { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .foot-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 3px; color: var(--cream); margin-bottom: 12px; }
+  .foot-brand img { width: 30px; height: 30px; object-fit: contain; }
+  .foot-col p { font-size: 13.5px; max-width: 300px; }
+  .foot-col h4 { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--terracotta-soft); margin-bottom: 14px; }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .foot-col ul a:hover { color: var(--white); }
+  .foot-bottom {
+    border-top: 1px solid rgba(247,243,238,.12); margin-top: 44px; padding-top: 24px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: rgba(247,243,238,.45);
+  }
+
+  /* ---------- reveal animations ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .float-chip { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top"><img src="images/sknbase-logo.png" alt="SKNBASE logo" />SKNBASE</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#scan">Face scan</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="#pricing">Get early access</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>In beta · Launching on the App Store August 2026</span>
+      <h1>Skincare that finally understands <span class="accent">Nigerian skin.</span></h1>
+      <p class="lead">SKNBASE builds your personalized morning &amp; evening routine — matched to your skin type, your concern, your city's climate, and your budget in naira. Powered by AI. Grounded in dermatology for melanin-rich skin.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="#pricing">Join the beta →</a>
+        <a class="btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="store-note">Coming soon to the <strong>App Store</strong> &amp; <strong>Google Play</strong></p>
+    </div>
+    <div class="hero-visual">
+      <span class="float-chip c1">✓ 90% match</span>
+      <span class="float-chip c2">🌡️ Lagos-humidity proof</span>
+      <span class="float-chip c3">₦ Fits your budget</span>
+      <div class="phone"><img src="images/shot-home.PNG" alt="SKNBASE home screen with skin score, streak, and personalized product list" /></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TRUST ================= -->
+<div class="trust">
+  <div class="wrap trust-inner">
+    <span>🧬 <strong>Melanin-first</strong> recommendations</span>
+    <span>🇳🇬 <strong>64+ products</strong> from Nigerian stores</span>
+    <span>🔬 <strong>Dermatology-informed</strong> engine</span>
+    <span>📆 <strong>Week-by-week</strong> active scheduling</span>
+  </div>
+</div>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">How it works</div>
+      <h2>Your routine in three steps</h2>
+      <p class="sub">No guesswork, no 10-step overwhelm. Tell us about your skin once — SKNBASE does the dermatology.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3>Tell us your skin</h3>
+        <p>A two-minute quiz: skin type, primary concern, your city, your experience with actives, and what you want to spend — in naira, for the whole routine.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">2</div>
+        <h3>Get your routine</h3>
+        <p>Our engine selects real products for your morning and evening — concern-matched actives, conflict-checked, budget-fitted, and climate-aware. Every pick is explained.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">3</div>
+        <h3>Track your glow-up</h3>
+        <p>Tick your routine daily, build streaks, scan your face to score six skin conditions, and watch your skin score climb week after week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FACE SCAN (dark) ================= -->
+<section class="scan-section" id="scan">
+  <div class="stars">
+    <i style="top:12%;left:8%;animation-delay:0s"></i><i style="top:24%;left:88%;animation-delay:.8s"></i>
+    <i style="top:64%;left:14%;animation-delay:1.6s"></i><i style="top:80%;left:78%;animation-delay:2.4s"></i>
+    <i style="top:38%;left:46%;animation-delay:3.2s"></i><i style="top:8%;left:58%;animation-delay:1.2s"></i>
+    <i style="top:88%;left:38%;animation-delay:2s"></i><i style="top:52%;left:92%;animation-delay:.4s"></i>
+  </div>
+  <div class="wrap scan-grid">
+    <div class="reveal">
+      <div class="kicker">AI Face Scan</div>
+      <h2>A skin analysis from your selfie camera</h2>
+      <p class="sub" style="margin-bottom:26px">A guided three-angle scan — front, left, right — analyzed by AI trained to read melanin-rich skin honestly. No filters, no flattery.</p>
+      <ul class="f-list">
+        <li><span class="tick">✓</span>Six conditions scored: acne, hyperpigmentation, redness, oiliness, dryness &amp; texture</li>
+        <li><span class="tick">✓</span>An overall skin score you can track scan after scan</li>
+        <li><span class="tick">✓</span>Your photos stay private — encrypted, visible only to you</li>
+        <li><span class="tick">✓</span>Non-medical, cosmetic guidance — honest about its limits</li>
+      </ul>
+    </div>
+    <div class="f-visual reveal">
+      <div class="phone"><img src="images/shot-facescan.PNG" alt="SKNBASE guided face scan analyzing skin with live hydration, texture and pore readings" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">Features</div>
+      <h2>Everything your skin needs. Nothing it doesn't.</h2>
+    </div>
+
+    <!-- Routine -->
+    <div class="feature-row">
+      <div class="reveal">
+        <h3>A morning &amp; evening routine that plans your whole week</h3>
+        <p>Strong actives like retinoids don't belong on your face every night — so SKNBASE schedules them. Daily-safe steps stay daily; stronger actives rotate across properly spaced nights, scaled to your experience level.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Day-by-day weekly plan — see exactly what to use tonight</li>
+          <li><span class="tick">✓</span>Ingredient conflicts checked automatically</li>
+          <li><span class="tick">✓</span>Streaks and daily ticks keep you consistent</li>
+        </ul>
+      </div>
+      <div class="f-visual reveal">
+        <div class="duo">
+          <div class="phone"><img src="images/shot-routine1.PNG" alt="SKNBASE routine tracker with daily morning and evening check-ins and 12-week journey" /></div>
+          <div class="phone"><img src="images/shot-routine2.PNG" alt="SKNBASE evening routine in dark mode with step-by-step products and match scores" /></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Real products -->
+    <div class="feature-row flip">
+      <div class="reveal">
+        <h3>Real products. Real Nigerian stores. Real prices in naira.</h3>
+        <p>Every recommendation is a product you can actually buy today — with live naira prices and direct links to trusted Nigerian retailers. From ₦10k starter routines to premium regimens, your budget is treated as the total for the whole routine, not per product.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Curated catalog: K-beauty, medical-grade &amp; science-led brands</li>
+          <li><span class="tick">✓</span>One-tap "View &amp; buy" with in-stock Nigerian stores</li>
+          <li><span class="tick">✓</span>Every product explained: what's in it, why it's for <em>you</em></li>
+        </ul>
+      </div>
+      <div class="f-visual reveal">
+        <div class="phone"><img src="images/shot-results2.PNG" alt="SKNBASE product sheet showing Anua serum at ₦18,500 with an in-stock Nigerian store link" /></div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="feature-row">
+      <div class="reveal">
+        <h3>Progress you can actually see</h3>
+        <p>Your Skin Journey dashboard turns consistency into visible results: an overall skin score, a six-way AI evaluation radar, weekly condition trends, and scan-to-scan comparisons.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Skin score with change since your last scan</li>
+          <li><span class="tick">✓</span>Clarity, smoothness, hydration, balance, calm &amp; even tone</li>
+          <li><span class="tick">✓</span>Monthly check-ins that keep your routine honest</li>
+        </ul>
+      </div>
+      <div class="f-visual reveal">
+        <div class="phone"><img src="images/shot-progress.PNG" alt="SKNBASE skin journey dashboard with skin score and AI evaluation radar chart" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">Why SKNBASE</div>
+      <h2>Built for skin the big apps ignore</h2>
+      <p class="sub">Most skincare apps were trained on other people's skin, other climates, and other currencies. We started from yours.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="emoji">🧬</div>
+        <h3>Melanin-first, always</h3>
+        <p>Melanin-rich skin marks easily — post-inflammatory hyperpigmentation is our #1 target. Every active is chosen with dark-spot safety in mind, favouring proven brighteners like tranexamic acid and azelaic acid.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="emoji">🌡️</div>
+        <h3>Made for your climate</h3>
+        <p>Lagos humidity and Abuja dryness need different textures. SKNBASE scores every product for your city's climate, so your moisturizer works with the weather — not against it.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="emoji">₦</div>
+        <h3>Honest about money</h3>
+        <p>Budgets are real. Yours is respected as the total cost of your full routine in naira — and the engine optimizes for the best skin outcome under it, never just the cheapest basket.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section style="padding-top:0; padding-bottom:60px">
+  <div class="center reveal wrap">
+    <div class="kicker">The app</div>
+    <h2>Take a look around</h2>
+  </div>
+  <div class="gallery-scroll">
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-home.PNG" alt="Home dashboard" loading="lazy" /></div><figcaption>Home &amp; skin score</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-questionnaire.PNG" alt="Skin profile quiz" loading="lazy" /></div><figcaption>2-minute skin quiz</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-results1.PNG" alt="Personalized products" loading="lazy" /></div><figcaption>Your matched products</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-routine1.PNG" alt="Routine tracking" loading="lazy" /></div><figcaption>Daily routine tracking</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-routine2.PNG" alt="Evening routine dark mode" loading="lazy" /></div><figcaption>Tonight's routine</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-facescan.PNG" alt="AI face scan" loading="lazy" /></div><figcaption>AI face scan</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-progress.PNG" alt="Progress dashboard" loading="lazy" /></div><figcaption>Skin journey</figcaption></figure>
+    <figure class="g-item reveal"><div class="phone"><img src="images/shot-results2.PNG" alt="Product buy sheet" loading="lazy" /></div><figcaption>Buy from Nigerian stores</figcaption></figure>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing" style="padding-top:60px">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">Pricing</div>
+      <h2>Start free. Glow up when you're ready.</h2>
+      <p class="sub">SKNBASE is in beta — join now for early access before the August launch.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="plan">Free</div>
+        <div class="amount">₦0</div>
+        <div class="per">forever</div>
+        <ul>
+          <li><span class="tick">✓</span>One full skin analysis every month</li>
+          <li><span class="tick">✓</span>Your personalized routine, first product unlocked</li>
+          <li><span class="tick">✓</span>Daily routine check-ins &amp; streaks</li>
+          <li><span class="tick">✓</span>Skin tips tuned to Nigerian skin</li>
+        </ul>
+        <a class="btn-ghost" href="mailto:hello@sknbase.app?subject=SKNBASE%20beta%20access">Join the beta</a>
+      </div>
+      <div class="price-card premium reveal">
+        <div class="badge-popular">Most popular</div>
+        <div class="plan">Premium</div>
+        <div class="amount">₦4,000</div>
+        <div class="per">per month</div>
+        <ul>
+          <li><span class="tick">✓</span>Unlimited skin analyses</li>
+          <li><span class="tick">✓</span>Full routine with every product unlocked</li>
+          <li><span class="tick">✓</span>AI face scans &amp; skin score tracking</li>
+          <li><span class="tick">✓</span>Weekly active schedule &amp; timeline milestones</li>
+          <li><span class="tick">✓</span>Skin journey archive &amp; monthly check-ins</li>
+        </ul>
+        <a class="btn-primary" href="mailto:hello@sknbase.app?subject=SKNBASE%20beta%20access">Get early access →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="padding-top:60px">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">FAQ</div>
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>When does SKNBASE launch?</summary>
+        <p>We're launching on the App Store and Google Play in August 2026. The app is in active beta right now — email us for early access.</p>
+      </details>
+      <details>
+        <summary>Is this medical advice?</summary>
+        <p>No. SKNBASE gives general, cosmetic skincare guidance based on visible, non-medical observations. For persistent acne, severe pigmentation, or any medical concern, please see a licensed dermatologist.</p>
+      </details>
+      <details>
+        <summary>Which cities does it work for?</summary>
+        <p>Any Nigerian city. The engine scores every product for your local climate — humid coastal cities like Lagos and Port Harcourt get different texture recommendations than drier cities like Abuja and Kano.</p>
+      </details>
+      <details>
+        <summary>Do you sell the products?</summary>
+        <p>No — and that keeps our recommendations honest. Every product links out to trusted Nigerian retailers with live prices, so you buy directly from stores that stock it.</p>
+      </details>
+      <details>
+        <summary>What happens to my face scan photos?</summary>
+        <p>They're stored privately and encrypted, visible only to your account, and used solely to generate your analysis and progress tracking. You can permanently delete your account and all your data in-app at any time.</p>
+      </details>
+      <details>
+        <summary>How much does it cost?</summary>
+        <p>The core experience is free, including one full skin analysis a month. Premium is ₦4,000/month and unlocks unlimited analyses, your complete routine, face scans, and full progress tracking.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <h2>Your best skin is a routine away.</h2>
+      <p>Join the SKNBASE beta today and be first in line when we launch this August.</p>
+      <a class="btn-light" href="mailto:hello@sknbase.app?subject=SKNBASE%20beta%20access">Get early access</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-col">
+      <div class="foot-brand"><img src="images/sknbase-logo.png" alt="" />SKNBASE</div>
+      <p>AI-powered skincare for Nigerian, melanin-rich skin. Personalized routines, honest budgets, real results.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#scan">Face scan</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="https://rbfbxxrpxtjcvjfcjnom.supabase.co/functions/v1/sknbase-legal?doc=privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+        <li><a href="https://rbfbxxrpxtjcvjfcjnom.supabase.co/functions/v1/sknbase-legal?doc=terms" target="_blank" rel="noopener">Terms of Service</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@sknbase.app">hello@sknbase.app</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© <span id="year">2026</span> SKNBASE. All rights reserved.</span>
+    <span>Made with ❤️ in Nigeria</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll-reveal
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
