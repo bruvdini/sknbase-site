@@ -18,7 +18,7 @@
 <div class="nav"><a href="/privacy">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms of Service</a></div>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: July 2, 2026</p>
+<p class="updated">Last updated: September 14, 2026</p>
 
 <p>SKNBASE ("we", "us") provides an AI-powered skincare recommendation app. This policy explains what data we collect, how we use it, and the choices you have.</p>
 
@@ -26,7 +26,7 @@
 <ul>
   <li><strong>Account info:</strong> email address, and name/avatar if you provide them.</li>
   <li><strong>Skin profile:</strong> skin type, concerns, city, budget, and quiz answers you submit to generate a routine.</li>
-  <li><strong>Photos:</strong> selfies you take for face-scan skin analysis. These are stored in a private, encrypted storage bucket accessible only to your account, and are used solely to generate your analysis and let you track visual progress over time.</li>
+  <li><strong>Photos:</strong> selfies you take for face-scan skin analysis. These are stored in a private, encrypted storage bucket accessible only to your account, and are used solely to generate your analysis and let you track visual progress over time. With your explicit permission, they are sent to our AI processors for analysis &mdash; see <a href="#face-data">Face data</a> below for full details.</li>
   <li><strong>Usage data:</strong> routine check-ins, streaks, and app interactions needed to power your progress tracking.</li>
   <li><strong>Purchase data:</strong> subscription status via our payments provider (RevenueCat) and the App Store / Play Store. We do not receive or store your card details.</li>
 </ul>
@@ -39,8 +39,20 @@
   <li>To improve the app and respond to support requests.</li>
 </ul>
 
+<h2 id="face-data">Face data</h2>
+<p>The face-scan feature is the only part of SKNBASE that processes images of your face. We treat this as sensitive information and handle it as follows.</p>
+<ul>
+  <li><strong>What we collect:</strong> up to three photographs of your face (left, front and right angles), captured with the camera or chosen from your photo library. We also generate a background-removed copy of each photo so it displays cleanly in your skin journey.</li>
+  <li><strong>What we do NOT collect:</strong> we do <strong>not</strong> create, derive, or store a faceprint, face template, face geometry map, or any other biometric identifier, and we never use face data to identify or authenticate you. The app uses on-device face detection (Google ML Kit) purely to tell you when your face is framed and aligned; that detection runs entirely on your device, is discarded frame by frame, and is never transmitted or stored.</li>
+  <li><strong>How we use it:</strong> solely to produce your non-medical, cosmetic skin estimate and the personalized routine guidance shown to you, and to let you compare your photos over time. Face data is never used for advertising, never sold, and never used to identify you.</li>
+  <li><strong>Who we share it with:</strong> your photos are transmitted, over an encrypted (TLS) connection, to two processors acting on our behalf: <strong>Anthropic</strong> (Claude), which analyzes the images to produce your skin estimate and routine text, and <strong>Replicate</strong>, which removes the photo background. They process the images only to return that result to us and are contractually required to provide the same or equal protection for your data that this policy describes. We do not permit your photos to be used to train AI models. We share face data with no one else.</li>
+  <li><strong>Your permission:</strong> the app explains what is sent and who it is sent to, and asks for your explicit agreement, before any photo leaves your device. You can decline and continue using the rest of SKNBASE without a face scan.</li>
+  <li><strong>Where it is stored:</strong> in a private, access-controlled storage bucket in our Supabase project, hosted in the European Union (London, <code>eu-west-2</code>). Only your own account can read your photos. Neither Anthropic nor Replicate retains the images as part of our integration.</li>
+  <li><strong>How long we keep it:</strong> your scan photos are retained only while your account is active, so that you can see your progress history. You can delete individual scans at any time, and deleting your account permanently removes every photo, including all background-removed copies, from our storage. We do not keep backups of deleted face data beyond routine short-term system backups, which age out within 30 days.</li>
+</ul>
+
 <h2>Third parties we work with</h2>
-<p>We use trusted service providers to operate the app: Supabase (database and secure file storage), Anthropic (Claude, to analyze skin photos and generate routine text), Replicate (to remove photo backgrounds for your scan images), and RevenueCat (to manage subscriptions). These providers process data only as needed to deliver the app's features and are bound by their own privacy and security obligations.</p>
+<p>We use trusted service providers to operate the app: Supabase (database and secure file storage), Anthropic (Claude, to analyze skin photos and generate routine text), Replicate (to remove photo backgrounds for your scan images), and RevenueCat (to manage subscriptions). These providers process data only as needed to deliver the app's features, are bound by contractual obligations to provide the same or equal protection for your data as set out in this policy, and are not permitted to use your data for their own purposes or to train AI models.</p>
 
 <h2>Data retention and deletion</h2>
 <p>We retain your data for as long as your account is active. You can permanently delete your account and all associated data &mdash; profile, routines, check-ins, and photos &mdash; at any time from Profile &rarr; Account &rarr; Delete Account. This action is irreversible.</p>
